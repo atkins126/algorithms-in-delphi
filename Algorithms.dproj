@@ -139,6 +139,8 @@
         <DCCReference Include="uRunnableInterface.pas"/>
         <DCCReference Include="Routines\uInsertionSortRoutine.pas"/>
         <DCCReference Include="uOptions.pas"/>
+        <DCCReference Include="external\Velthuis.Console.pas"/>
+        <DCCReference Include="external\Velthuis.AutoConsole.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

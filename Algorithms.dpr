@@ -9,7 +9,9 @@ uses
   uMain in 'uMain.pas',
   uRunnableInterface in 'uRunnableInterface.pas',
   uInsertionSortRoutine in 'Routines\uInsertionSortRoutine.pas',
-  uOptions in 'uOptions.pas';
+  uOptions in 'uOptions.pas',
+  Velthuis.Console in 'external\Velthuis.Console.pas',
+  Velthuis.AutoConsole in 'external\Velthuis.AutoConsole.pas';
 
 var
   Application: IRunnable;
