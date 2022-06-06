@@ -3,12 +3,13 @@
 interface
 
 uses
-  SysUtils, uRunnableInterface, uOptions;
+  SysUtils, uRunnableInterface, uOptions, Velthuis.Console;
 
 type
 
   TApplication = class(TInterfacedObject, IRunnable)
   private
+    function GetHeader: string;
     function GetApplicationDescription: string;
     function DisplayOptions: string;
     function ValidateOption(AOption: string): TOptions;
@@ -28,19 +29,33 @@ end;
 
 function TApplication.GetApplicationDescription: string;
 begin
-  Result := 'This is my application of the algorithms presented ' +
+  Result := GetHeader + #13#10 +
+            'This is my application of the algorithms presented ' +
             'on the book ' + QuotedStr('Introduction to Algorithms - Third Edition') +
-            ' by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein.'
+            ' by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein.' +
+            #13#10 + GetHeader + #13#10;
+end;
+
+function TApplication.GetHeader: string;
+begin
+  Result := '================================================================='
 end;
 
 procedure TApplication.Run;
 var
-  Option: String;
+  Input: String;
+  Option: TOptions;
+  NextEvent: IRunnable;
 begin
-  WriteLn(GetApplicationDescription);
-  WriteLn(DisplayOptions);
-  ReadLn(Option);
-  //RunnableFactory.Create(ValidateOption(Option));
+    WriteLn(GetApplicationDescription);
+  repeat
+    WriteLn(DisplayOptions);
+    ReadLn(Input);
+    Option := ValidateOption(Input);
+  //  NextEvent := RunnableFactory.Create(Option);
+    NextEvent.Run;
+    ClrScr;
+  until (Option <> toExit);
 end;
 
 function TApplication.ValidateOption(AOption: string): TOptions;
