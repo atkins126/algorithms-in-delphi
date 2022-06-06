@@ -40,13 +40,19 @@ begin
   WriteLn(GetApplicationDescription);
   WriteLn(DisplayOptions);
   ReadLn(Option);
-
+  //RunnableFactory.Create(ValidateOption(Option));
 end;
 
 function TApplication.ValidateOption(AOption: string): TOptions;
+var
+  OptionValue: Integer;
 begin
   try
-    Result := TOptions(StrToInt(AOption));
+    OptionValue := StrToInt(AOption);
+    if TOptions(OptionValue) in [toInsertionSort..toExit] then
+      Result := TOptions(OptionValue)
+    else
+      raise Exception.Create('Option outside scope');
   except
     on E: Exception do
       Result := toInvalid;
